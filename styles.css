@@ -70,6 +70,24 @@ body {
     width: 50%;
     margin: 1em 0em;
 }
+
+@media only screen and (max-width: 960px) {
+    .container {
+        height: auto;
+    }
+    #clock {
+        margin-top: 1em;
+    }
+    .container > .bookmark-container {
+        flex-direction: column;
+        width: 60%;
+    }
+    .bookmark-container > .bookmark-set {
+        width: auto;
+        margin: 1em 0em;
+    }
+}
+
 .bookmark-set{
     padding: 1em;
     background-color: #272727;
