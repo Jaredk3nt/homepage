@@ -20,6 +20,7 @@ Link Source Code : http://thecodeplayer.com/walkthrough/matrix-rain-animation-ht
                 overflow-y: hidden;
             }
             body {
+
                 text-align: center;
                 display: table;
                 background: black;
@@ -67,13 +68,31 @@ Link Source Code : http://thecodeplayer.com/walkthrough/matrix-rain-animation-ht
                     opacity: 0;
                 }
             }
+<!--New text box style thing -->
+            div.transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+div.transbox p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+
 
         </style>
     </head>
     <body>
 
+
+
         <canvas id="c"></canvas>
         <span id = "author"></span>
+
 
         <script>
         // geting canvas by id c
@@ -99,6 +118,7 @@ Link Source Code : http://thecodeplayer.com/walkthrough/matrix-rain-animation-ht
             drops[x] = 1;
 
         //drawing the characters
+
         function draw()
         {
             //Black BG for the canvas
@@ -129,5 +149,7 @@ Link Source Code : http://thecodeplayer.com/walkthrough/matrix-rain-animation-ht
         setInterval( draw, 35 );
 
         </script>
+
+
     </body>
 </html>
