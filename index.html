@@ -1,127 +1,279 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--
+Original code : @thecodeplayer,
+Link Source Code : http://thecodeplayer.com/walkthrough/matrix-rain-animation-html5-canvas-javascript
+-->
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Home</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="favicon.png" rel="shortcut icon" type="image/x-icon" />
-</head>
-
-<body>
-
-    <div id="search">
-
-        <input id="search-field" type="text" name="search-field" onkeypress="return search(event)"/>
-    </div>
-    <div class="container">
-        <div id="clock"></div>
-        <div class="weather-container">
-            <div class="row">
-                <div id="weather-description"class="inline"></div>
-                <div class="inline">-</div>
-                <div id="temp" class="inline"></div>
-            </div>
-        </div>
-        <div class="bookmark-container">
-            <div class="bookmark-set">
-                <div class="bookmark-title">Social</div>
-                <div class="bookmark-inner-container">
-                    <a class="bookmark" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">MY_Gmail</a>
-                    <a class="bookmark" href="https://outlook.swast.nhs.uk/owa/#path=/mail" target="_blank">SWAST_Email</a>
-                    <a class="bookmark" href="https://reddit.com" target="_blank">Reddit</a>
-                      <a class="bookmark" href="https://facebook.com" target="_blank">Facebook</a>
-
-                </div>
-            </div>
-            <div class="bookmark-set">
-                <div class="bookmark-title">Media</div>
-                <div class="bookmark-inner-container">
-                    <a class="bookmark" href="https://youtube.com" target="_blank">Youtube</a>
-                    <a class="bookmark" href="https://www.bbc.co.uk/iplayer" target="_blank">BBCiPlayer</a>
-                </div>
-            </div>
-            <div class="bookmark-set">
-                <div class="bookmark-title">Games</div>
-                <div class="bookmark-inner-container">
-                  <a class="bookmark" href="http://xmageservers.online/" target="_blank">Xmage_Servers</a>
-                  <a class="bookmark" href="https://www.chess.com/" target="_blank">Chess</a>
-                  <a class="bookmark" href="https://en.boardgamearena.com/#!gamelobby" target="_blank">Board_Games</a>
-                </div>
-            </div>
-            <div class="bookmark-set">
-                <div class="bookmark-title">Open Uni</div>
-                <div class="bookmark-inner-container">
-                  <a class="bookmark" href="https://msds.open.ac.uk/students/" target="_blank">Open_Uni</a>
-                  <a class="bookmark" href="https://learn2.open.ac.uk/course/view.php?name=TM257-18J" target="_blank">TM257_Networking</a>
-                    <a class="bookmark" href="https://learn2.open.ac.uk/course/view.php?name=M250-18J" target="_blank">M250_Java</a>
-                    <a class="bookmark" href="https://www.netacad.com/group/landing/v2/learn/" target="_blank">Netacad</a>
-                </div>
-            </div>
-        </div>
-
-        </div>
-
-    </div>
-
-    <script>
-        // Search on enter key event
-        function search(e) {
-            if (e.keyCode == 13) {
-                var val = document.getElementById("search-field").value;
-                window.open("https://google.com/search?q=" + val);
+      <title>Home</title>
+      <link rel="stylesheet" href="styles.css">
+      <link href="favicon.png" rel="shortcut icon" type="image/x-icon" />
+        <style>
+            /*basic reset */
+            *{
+                margin: 0;
+                padding: 0;
             }
-        }
-        // Get current time and format
-        function getTime() {
-            let date = new Date(),
-                min = date.getMinutes(),
-                sec = date.getSeconds(),
-                hour = date.getHours();
 
-            return "" +
-                (hour < 10 ? ("0" + hour) : hour) + ":" +
-                (min < 10 ? ("0" + min) : min) + ":" +
-                (sec < 10 ? ("0" + sec) : sec);
-        }
+            /* Page settings */
+            html {
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle, #fff 0%, #aaa 100%) no-repeat;
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+            body {
 
-        window.onload = () => {
-            let xhr = new XMLHttpRequest();
-            // Request to open weather map
-            xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=2655095&units=metric&appid=e5b292ae2f9dae5f29e11499c2d82ece');
-            xhr.onload = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        let json = JSON.parse(xhr.responseText);
-                        console.log(json);
-                        document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " C";
-                        document.getElementById("weather-description").innerHTML = json.weather[0].description;
-                    } else {
-                        console.log('error msg: ' + xhr.status);
-                    }
+                text-align: center;
+                display: table;
+                background: black;
+                width: 100%;
+                height: 100%;
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+
+            canvas {display:block;}
+
+            #athing {
+              position: absolute;
+              top: 30px;
+              left: 10px;
+              color: #0A0;
+              z-index : 2;
+              box-sizing: border-box;
+              vertical-align: middle;
+            }
+
+            #author {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                color : #0F0;
+                z-index : 1;
+                box-sizing: border-box;
+                vertical-align: middle;
+            }
+
+            boxy {
+                font-family: monospace;
+                font-size: 1.5em;
+            }
+
+            span {
+                font-family: monospace;
+                font-size: 1.5em;
+            }
+            span:after {
+                content:">";
+                opacity: 0;
+                animation: cursor 1s infinite;
+            }
+            @keyframes cursor {
+                0% {
+                    opacity: 0;
+                }
+                40% {
+                    opacity: 0;
+                }
+                50% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 0;
                 }
             }
-            xhr.send();
-            // Set up the clock
-            document.getElementById("clock").innerHTML = getTime();
-            // Set clock interval to tick clock
-            setInterval( () => {
-                document.getElementById("clock").innerHTML = getTime();
-            },100);
+}
+
+div.transbox p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+
+
+        </style>
+    </head>
+    <body>
+
+
+
+        <canvas id="c"></canvas>
+        <span id = "author">adrian</span>
+        <boxy id = "athing"
+          <div class="container">
+              <div id="clock"></div>
+              <div class="weather-container">
+                  <div class="row">
+                    Weather
+                      <div id="weather-description"class="inline"></div>
+                      <div class="inline">-</div>
+                      <div id="temp" class="inline"></div>
+                  </div>
+              </div>
+              <div class="bookmark-container">
+                  <div class="bookmark-set">
+                      <div class="bookmark-title">Social</div>
+                      <div class="bookmark-inner-container">
+                          <a class="bookmark" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">MY_Gmail</a>
+                          <a class="bookmark" href="https://outlook.swast.nhs.uk/owa/#path=/mail" target="_blank">SWAST_Email</a>
+                          <a class="bookmark" href="https://reddit.com" target="_blank">Reddit</a>
+                            <a class="bookmark" href="https://facebook.com" target="_blank">Facebook</a>
+
+                      </div>
+                  </div>
+                  <div class="bookmark-set">
+                      <div class="bookmark-title">Media</div>
+                      <div class="bookmark-inner-container">
+                          <a class="bookmark" href="https://youtube.com" target="_blank">Youtube</a>
+                          <a class="bookmark" href="https://www.bbc.co.uk/iplayer" target="_blank">BBCiPlayer</a>
+                      </div>
+                  </div>
+                  <div class="bookmark-set">
+                      <div class="bookmark-title">Games</div>
+                      <div class="bookmark-inner-container">
+                        <a class="bookmark" href="http://xmageservers.online/" target="_blank">Xmage_Servers</a>
+                        <a class="bookmark" href="https://www.chess.com/" target="_blank">Chess</a>
+                        <a class="bookmark" href="https://en.boardgamearena.com/#!gamelobby" target="_blank">Board_Games</a>
+                      </div>
+                  </div>
+                  <div class="bookmark-set">
+                      <div class="bookmark-title">Open Uni</div>
+                      <div class="bookmark-inner-container">
+                        <a class="bookmark" href="https://msds.open.ac.uk/students/" target="_blank">Open_Uni</a>
+                        <a class="bookmark" href="https://learn2.open.ac.uk/course/view.php?name=TM257-18J" target="_blank">TM257_Networking</a>
+                          <a class="bookmark" href="https://learn2.open.ac.uk/course/view.php?name=M250-18J" target="_blank">M250_Java</a>
+                          <a class="bookmark" href="https://www.netacad.com/group/landing/v2/learn/" target="_blank">Netacad</a>
+                      </div>
+                  </div>
+              </div>
+
+              </div>
+
+
+          <script>
+              // Search on enter key event
+              function search(e) {
+                  if (e.keyCode == 13) {
+                      var val = document.getElementById("search-field").value;
+                      window.open("https://google.com/search?q=" + val);
+                  }
+              }
+              // Get current time and format
+              function getTime() {
+                  let date = new Date(),
+                      min = date.getMinutes(),
+                      sec = date.getSeconds(),
+                      hour = date.getHours();
+
+                  return "" +
+                      (hour < 10 ? ("0" + hour) : hour) + ":" +
+                      (min < 10 ? ("0" + min) : min) + ":" +
+                      (sec < 10 ? ("0" + sec) : sec);
+              }
+
+              window.onload = () => {
+                  let xhr = new XMLHttpRequest();
+                  // Request to open weather map
+                  xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=2655095&units=metric&appid=e5b292ae2f9dae5f29e11499c2d82ece');
+                  xhr.onload = () => {
+                      if (xhr.readyState === 4) {
+                          if (xhr.status === 200) {
+                              let json = JSON.parse(xhr.responseText);
+                              console.log(json);
+                              document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " C";
+                              document.getElementById("weather-description").innerHTML = json.weather[0].description;
+                          } else {
+                              console.log('error msg: ' + xhr.status);
+                          }
+                      }
+                  }
+                  xhr.send();
+                  // Set up the clock
+                  document.getElementById("clock").innerHTML = getTime();
+                  // Set clock interval to tick clock
+                  setInterval( () => {
+                      document.getElementById("clock").innerHTML = getTime();
+                  },100);
+              }
+
+              document.addEventListener("keydown", event => {
+                  if (event.keyCode == 32) {          // Spacebar code to open search
+                      document.getElementById('search').style.display = 'flex';
+                      document.getElementById('search-field').focus();
+                  } else if (event.keyCode == 27) {   // Esc to close search
+                      document.getElementById('search-field').value = '';
+                      document.getElementById('search-field').blur();
+                      document.getElementById('search').style.display = 'none';
+                  }
+              });
+          </script>
+
+        </boxy>
+
+        <script>
+        // geting canvas by id c
+        var c = document.getElementById("c");
+        var ctx = c.getContext("2d");
+
+        //making the canvas full screen
+        c.height = window.innerHeight;
+        c.width = window.innerWidth;
+
+        //chinese characters - taken from the unicode charset
+        var matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+        //converting the string into an array of single characters
+        matrix = matrix.split("");
+
+        var font_size = 10;
+        var columns = c.width / font_size; //number of columns for the rain
+        //an array of drops - one per column
+        var drops = [];
+        //x below is the x coordinate
+        //1 = y co-ordinate of the drop(same for every drop initially)
+        for(var x = 0; x < columns; x++)
+            drops[x] = 1;
+
+        //drawing the characters
+
+        function draw()
+        {
+            //Black BG for the canvas
+            //translucent BG to show trail
+            ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+            ctx.fillRect(0, 0, c.width, c.height);
+
+            ctx.fillStyle = "#0F0"; //green text
+            ctx.font = font_size + "px arial";
+            //looping over drops
+            for( var i = 0; i < drops.length; i++ )
+            {
+                //a random chinese character to print
+                var text = matrix[ Math.floor( Math.random() * matrix.length ) ];
+                //x = i*font_size, y = value of drops[i]*font_size
+                ctx.fillText(text, i * font_size, drops[i] * font_size);
+
+                //sending the drop back to the top randomly after it has crossed the screen
+                //adding a randomness to the reset to make the drops scattered on the Y axis
+                if( drops[i] * font_size > c.height && Math.random() > 0.975 )
+                    drops[i] = 0;
+
+                //incrementing Y coordinate
+                drops[i]++;
+            }
         }
 
-        document.addEventListener("keydown", event => {
-            if (event.keyCode == 32) {          // Spacebar code to open search
-                document.getElementById('search').style.display = 'flex';
-                document.getElementById('search-field').focus();
-            } else if (event.keyCode == 27) {   // Esc to close search
-                document.getElementById('search-field').value = '';
-                document.getElementById('search-field').blur();
-                document.getElementById('search').style.display = 'none';
-            }
-        });
-    </script>
-</body>
+        setInterval( draw, 35 );
+
+        </script>
+
+
+    </body>
 </html>
