@@ -46,7 +46,7 @@ Link Source Code : http://thecodeplayer.com/walkthrough/matrix-rain-animation-ht
                 font-size: 1.5em;
             }
             span:after {
-                content:"_gheorghe";
+                content:">";
                 opacity: 0;
                 animation: cursor 1s infinite;
             }
@@ -73,7 +73,7 @@ Link Source Code : http://thecodeplayer.com/walkthrough/matrix-rain-animation-ht
     <body>
 
         <canvas id="c"></canvas>
-        <span id = "author">adrian</span>
+        <span id = "author"></span>
 
         <script>
         // geting canvas by id c
@@ -96,7 +96,7 @@ Link Source Code : http://thecodeplayer.com/walkthrough/matrix-rain-animation-ht
         //x below is the x coordinate
         //1 = y co-ordinate of the drop(same for every drop initially)
         for(var x = 0; x < columns; x++)
-            drops[x] = 1; 
+            drops[x] = 1;
 
         //drawing the characters
         function draw()
