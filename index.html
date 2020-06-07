@@ -84,6 +84,12 @@
         }
 
         window.onload = () => {
+            //randomize background color
+            let colors = ["#E0BBE4","#957DAD","#D291BC",
+                          "#FEC8D8","#FF9AA2","#FFB7B2",
+                          "#FFDAC1","#32F0CB","#B5EAD7","#C7CEEA"]
+            document.getElementsByTagName("body")[0].style.background = colors[Math.floor(Math.random() * colors.length)];
+            
             let xhr = new XMLHttpRequest();
             // Request to open weather map
             xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=4737316&units=imperial&appid=e5b292ae2f9dae5f29e11499c2d82ece');
