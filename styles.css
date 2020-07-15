@@ -72,7 +72,7 @@ body {
   display: inline-block;
 }
 
-.bookmark-container {
+#bookmark-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
