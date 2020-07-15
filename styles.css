@@ -7,6 +7,7 @@
   --containerBg: #272727;
   --searchBg: var(--containerBg);
   --scrollbarColor: #3f3f3f;
+  --fontFamily: 'Roboto Mono', monospace;
 }
 
 body {
@@ -27,7 +28,7 @@ body {
   font-family: sans-serif;
   font-size: 3.5rem;
   font-weight: 600;
-  font-family: 'Roboto Mono';
+  font-family: var(--fontFamily);
   color: var(--fg);
   margin-bottom: 0.25em;
 }
@@ -50,7 +51,7 @@ body {
   box-sizing: border-box;
   background-color: var(--searchBg);
   border: solid 0px var(--searchBg);
-  font-family: 'Roboto Mono';
+  font-family: var(--fontFamily);
   font-size: 4rem;
   color: var(--fg);
   outline: none;
@@ -64,7 +65,7 @@ body {
   background-color: var(--containerBg);
   padding: 1em;
   border-radius: 3px;
-  font-family: 'Roboto Mono';
+  font-family: var(--fontFamily);
   color: var(--fg);
   text-align: center;
 }
@@ -101,7 +102,7 @@ body {
   padding: 1em;
   background-color: var(--containerBg);
   border-radius: 3px;
-  font-family: 'Roboto Mono';
+  font-family: var(--fontFamily);
   font-size: 0.85rem;
   width: 25%;
   height: 12em;
