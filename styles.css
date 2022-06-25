@@ -88,11 +88,11 @@ body {
   #clock {
     margin-top: 1em;
   }
-  .container > .bookmark-container {
+  .container > #bookmark-container {
     flex-direction: column;
     width: 60%;
   }
-  .bookmark-container > .bookmark-set {
+  #bookmark-container > .bookmark-set {
     width: auto;
     margin: 1em 0em;
   }
