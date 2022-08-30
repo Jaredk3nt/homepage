@@ -100,8 +100,8 @@
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
               let json = JSON.parse(xhr.responseText);
-              document.getElementById("sunrise").innerHTML = new Date(json.sys.sunrise * 1000).toUTCString();
-              document.getElementById("sunset").innerHTML = new Date(json.sys.sunset * 1000).toUTCString();
+              document.getElementById("sunrise").innerHTML = new Date(json.sys.sunrise * 1000).toLocaleTimeString();
+              document.getElementById("sunset").innerHTML = new Date(json.sys.sunset * 1000).toLocaleTimeString();
               document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " °C";
               document.getElementById("weather-description").innerHTML = json.weather[0].description;
             } else {
