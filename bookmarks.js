@@ -14,20 +14,11 @@ const bookmarks = [
       { name: "Youtube", url: "https://youtube.com" },
       { name: "Netflix", url: "https://netflix.com" },
       { name: "Crunchyroll", url: "https://crunchyroll.com" },
-      {
-        name: "Amazon Prime",
-        url: "https://www.amazon.com/Amazon-Video",
-      },
     ],
   },
   {
     title: "Reddit",
     links: [
-      { name: "/r/overwatch", url: "https://reddit.com/r/overwatch" },
-      {
-        name: "/r/pcmasterrace",
-        url: "https://reddit.com/r/pcmasterrace",
-      },
       { name: "/r/me_irl", url: "https://reddit.com/r/me_irl" },
       {
         name: "/r/battlestations",
@@ -42,6 +33,13 @@ const bookmarks = [
     links: [
       { name: "Twitter", url: "https://twitter.com" },
       { name: "Facebook", url: "https://facebook.com" },
+    ],
+  },
+  {
+    title: "Tools",
+    links: [
+      { name: "ePub Reader", url: "https://epub.kayou.ga" },
+      { name: "TV Player", url: "https://tvplayer.kayou.ga" },
     ],
   },
 ];
