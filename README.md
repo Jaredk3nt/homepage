@@ -1,4 +1,4 @@
-# [Homepage](https://danggoodcode.com/startpage)
+# [Homepage](https://home.kayou.ga)
 
 ![homepage](https://i.redd.it/cbnzq36zj3601.gif)
 
