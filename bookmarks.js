@@ -23,11 +23,4 @@ const bookmarks = [
       { name: "Facebook", url: "https://facebook.com" },
     ],
   },
-  {
-    title: "Tools",
-    links: [
-      { name: "ePub Reader", url: "https://epub.kayou.ga" },
-      { name: "TV Player", url: "https://tvplayer.kayou.ga" },
-    ],
-  },
 ];

@@ -72,15 +72,15 @@
         let xhr = new XMLHttpRequest();
         xhr.open(
           "GET",
-          "http://www.geoplugin.net/json.gp"
+          "https://ipapi.co/json/"
         );
         xhr.onload = () => {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
               let json = JSON.parse(xhr.responseText);
-              document.getElementById("countryCode").innerHTML = json.geoplugin_countryCode
-              document.getElementById("city").innerHTML = json.geoplugin_city
-              getWeatherCallback(json.geoplugin_latitude, json.geoplugin_longitude);
+              document.getElementById("countryCode").innerHTML = json.country
+              document.getElementById("city").innerHTML = json.city
+              getWeatherCallback(json.latitude, json.longitude);
             } else {
               console.log("error msg: " + xhr.status);
             }
