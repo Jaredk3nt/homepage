@@ -10,7 +10,7 @@
     <link href="favicon.png" rel="shortcut icon" type="image/x-icon" />
   </head>
   <body>
-    <div id="search">
+    <div ondblclick="closeSearch()" id="search">
       <input
         id="search-field"
         type="text"
@@ -23,20 +23,20 @@
       <div class="weather-container">
         <div class="row">
           <div id="weather-description" class="inline"></div>
-          <div class="inline">[</div>
-          <div id="countryCode" class="inline"></div>
-          <div id="city" class="inline"></div>
-          <div class="inline">]</div>
           <div id="temp" class="inline"></div>
+          <div id="region"></div>
         </div>
       </div>
       <div id="bookmark-container"></div>
-      <div class="hint">Press spacebar to search, Esc to come back</div><br />
       <div class="weather-container">
         <div class="row">
           Sunrise: <div id="sunrise" class="inline"></div>
           Sunset: <div id="sunset" class="inline"></div>
         </div>
+      </div>
+      <div ondblclick="openSearch()" class="hint">
+        SPACEBAR / double click here to enter search <br />
+        ESC / double click to come back
       </div>
     </div>
 
@@ -44,8 +44,8 @@
     <script>
       const searchUrl = "https://google.com/search?q=";
       // Search on enter key event
-      function search(e) {
-        if (e.keyCode == 13) {
+      function search(event) {
+        if (event.key == "Enter") {
           var val = document.getElementById("search-field").value;
           window.open(searchUrl + val);
         }
@@ -78,8 +78,7 @@
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
               let json = JSON.parse(xhr.responseText);
-              document.getElementById("countryCode").innerHTML = json.country
-              document.getElementById("city").innerHTML = json.city
+              document.getElementById("region").innerHTML = json.country + " " + json.city
               getWeatherCallback(json.latitude, json.longitude);
             } else {
               console.log("error msg: " + xhr.status);
@@ -131,6 +130,16 @@
           .join("");
       }
 
+      function openSearch(){
+        document.getElementById("search").style.display = "flex";
+        document.getElementById("search-field").focus();
+      }
+      function closeSearch(){
+        document.getElementById("search-field").value = "";
+          document.getElementById("search-field").blur();
+          document.getElementById("search").style.display = "none";
+      }
+
       window.onload = () => {
         setupBookmarks();
         getGeoLocation(getWeather);
@@ -144,15 +153,12 @@
       };
 
       document.addEventListener("keyup", (event) => {
-        if (event.keyCode == 32) {
+        if (event.key == " ") {
           // Spacebar code to open search
-          document.getElementById("search").style.display = "flex";
-          document.getElementById("search-field").focus();
-        } else if (event.keyCode == 27) {
+          openSearch();
+        } else if (event.key == "Escape") {
           // Esc to close search
-          document.getElementById("search-field").value = "";
-          document.getElementById("search-field").blur();
-          document.getElementById("search").style.display = "none";
+          closeSearch();
         }
       });
     </script>

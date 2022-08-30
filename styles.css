@@ -63,7 +63,7 @@ body {
 }
 
 .weather-container {
-  width: 30%;
+  width: 35%;
   background-color: var(--containerBg);
   padding: 1em;
   border-radius: 3px;
@@ -155,4 +155,6 @@ body {
   font-family: var(--fontFamily);
   font-size: 0.85rem;
   color: var(--secondaryFg);
+  margin: 1em 0em;
+  text-align: center;
 }
