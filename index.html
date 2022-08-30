@@ -23,11 +23,21 @@
       <div class="weather-container">
         <div class="row">
           <div id="weather-description" class="inline"></div>
-          <div class="inline">-</div>
+          <div class="inline">[</div>
+          <div id="countryCode" class="inline"></div>
+          <div id="city" class="inline"></div>
+          <div class="inline">]</div>
           <div id="temp" class="inline"></div>
         </div>
       </div>
       <div id="bookmark-container"></div>
+      <div class="hint">Press spacebar to search, Esc to come back</div><br />
+      <div class="weather-container">
+        <div class="row">
+          Sunrise: <div id="sunrise" class="inline"></div>
+          Sunset: <div id="sunset" class="inline"></div>
+        </div>
+      </div>
     </div>
 
     <script src="bookmarks.js"></script>
@@ -56,22 +66,21 @@
           (sec < 10 ? "0" + sec : sec)
         );
       }
-      // Handle Weather request
-      function getWeather() {
+
+      // Get IP and Location
+      function getGeoLocation(getWeatherCallback){
         let xhr = new XMLHttpRequest();
-        // Request to open weather map
         xhr.open(
           "GET",
-          "https://api.openweathermap.org/data/2.5/weather?id=4737316&units=imperial&appid=e5b292ae2f9dae5f29e11499c2d82ece"
+          "http://www.geoplugin.net/json.gp"
         );
         xhr.onload = () => {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
               let json = JSON.parse(xhr.responseText);
-              document.getElementById("temp").innerHTML =
-                json.main.temp.toFixed(0) + " F";
-              document.getElementById("weather-description").innerHTML =
-                json.weather[0].description;
+              document.getElementById("countryCode").innerHTML = json.geoplugin_countryCode
+              document.getElementById("city").innerHTML = json.geoplugin_city
+              getWeatherCallback(json.geoplugin_latitude, json.geoplugin_longitude);
             } else {
               console.log("error msg: " + xhr.status);
             }
@@ -79,11 +88,34 @@
         };
         xhr.send();
       }
+
+      // Handle Weather request
+      function getWeather(lat, lon) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(
+          "GET",
+          "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=Metric&appid=e5b292ae2f9dae5f29e11499c2d82ece"
+        );
+        xhr.onload = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              let json = JSON.parse(xhr.responseText);
+              document.getElementById("sunrise").innerHTML = new Date(json.sys.sunrise * 1000).toUTCString();
+              document.getElementById("sunset").innerHTML = new Date(json.sys.sunset * 1000).toUTCString();
+              document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " °C";
+              document.getElementById("weather-description").innerHTML = json.weather[0].description;
+            } else {
+              console.log("error msg: " + xhr.status);
+            }
+          }
+        };
+        xhr.send();
+      }
+
       // Handle writing out Bookmarks
       function setupBookmarks() {
         const bookmarkContainer = document.getElementById("bookmark-container");
-        bookmarkContainer.innerHTML = bookmarks
-          .map((b) => {
+        bookmarkContainer.innerHTML = bookmarks.map((b) => {
             const html = ["<div class='bookmark-set'>"];
             html.push(`<div class="bookmark-title">${b.title}</div>`);
             html.push('<div class="bookmark-inner-container">');
@@ -101,7 +133,8 @@
 
       window.onload = () => {
         setupBookmarks();
-        getWeather();
+        getGeoLocation(getWeather);
+        //getWeather();
         // Set up the clock
         document.getElementById("clock").innerHTML = getTime();
         // Set clock interval to tick clock

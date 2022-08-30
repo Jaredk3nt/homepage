@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+/* @import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); */
+@import url('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
 
 :root {
   --bg: #5f4b8b;
@@ -7,7 +8,8 @@
   --containerBg: #272727;
   --searchBg: var(--containerBg);
   --scrollbarColor: #3f3f3f;
-  --fontFamily: 'Roboto Mono', monospace;
+  /* --fontFamily: 'Roboto Mono', monospace; */
+  --fontFamily: 'Ubuntu', monospace;
 }
 
 body {
@@ -147,4 +149,9 @@ body {
 }
 .bookmark:hover {
   color: var(--fg);
+}
+
+.hint {
+  font-family: var(--fontFamily);
+  font-size: 0.85rem;
 }
