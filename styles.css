@@ -154,4 +154,5 @@ body {
 .hint {
   font-family: var(--fontFamily);
   font-size: 0.85rem;
+  color: var(--secondaryFg);
 }
