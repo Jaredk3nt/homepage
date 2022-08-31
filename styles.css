@@ -155,7 +155,7 @@ body {
   font-family: var(--fontFamily);
   font-size: 0.85rem;
   color: var(--secondaryFg);
-  margin: 1em 0em;
+  margin: 2em 0em;
   text-align: center;
-  width: 30%;
+  width: 60%;
 }
