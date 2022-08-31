@@ -13,7 +13,7 @@ const bookmarks = [
     links: [
       { name: "Youtube", url: "https://youtube.com" },
       { name: "Netflix", url: "https://netflix.com" },
-      { name: "Crunchyroll", url: "https://crunchyroll.com" },
+      { name: "TikTok", url: "https://tiktok" },
     ],
   },
   {
@@ -21,6 +21,7 @@ const bookmarks = [
     links: [
       { name: "Twitter", url: "https://twitter.com" },
       { name: "Facebook", url: "https://facebook.com" },
+      { name: "Instagram", url: "https://instagram.com" },
     ],
   },
 ];

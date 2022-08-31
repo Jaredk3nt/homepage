@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link href="favicon.png" rel="shortcut icon" type="image/x-icon" />
   </head>
-  <body>
+  <body ondblclick="openSearch()">
     <div ondblclick="closeSearch()" id="search">
       <input
         id="search-field"
@@ -34,8 +34,8 @@
           Sunset: <div id="sunset" class="inline"></div>
         </div>
       </div>
-      <div ondblclick="openSearch()" class="hint">
-        SPACEBAR / double click here to enter search <br />
+      <div class="hint">
+        SPACEBAR / double click anywhere to enter search <br />
         ESC / double click to come back
       </div>
     </div>
