@@ -157,4 +157,5 @@ body {
   color: var(--secondaryFg);
   margin: 1em 0em;
   text-align: center;
+  width: 30%;
 }
