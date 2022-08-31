@@ -20,6 +20,7 @@
     </div>
     <div class="container">
       <div id="clock"></div>
+      <div id="joke" class="hint"></div>
       <div class="weather-container">
         <div class="row">
           <div id="weather-description" class="inline"></div>
@@ -88,6 +89,26 @@
         xhr.send();
       }
 
+      // Display random jokes
+      function getRandomJokes(){
+        let xhr = new XMLHttpRequest();
+        xhr.open(
+          "GET",
+          "https://v2.jokeapi.dev/joke/Any?type=single"
+        );
+        xhr.onload = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              let json = JSON.parse(xhr.responseText);
+              document.getElementById("joke").innerHTML = json.joke
+            } else {
+              console.log("error msg: " + xhr.status);
+            }
+          }
+        };
+        xhr.send();
+      }
+
       // Handle Weather request
       function getWeather(lat, lon) {
         let xhr = new XMLHttpRequest();
@@ -142,6 +163,7 @@
 
       window.onload = () => {
         setupBookmarks();
+        getRandomJokes();
         getGeoLocation(getWeather);
         //getWeather();
         // Set up the clock
