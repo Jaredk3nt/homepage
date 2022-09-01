@@ -1,4 +1,4 @@
-# [Homepage](https://home.kayou.ga)
+# [Homepage](https://kaykouo.github.io/homepage/)
 
 ![homepage](https://i.redd.it/cbnzq36zj3601.gif)
 
