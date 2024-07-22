@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 :root {
-  --bg: #5f4b8b;
-  --fg: #ffffff;
-  --secondaryFg: #b3b3b3;
-  --containerBg: #272727;
+  --bg: #e7dfdc;
+  --fg: #000000;
+  --secondaryFg: #000000;
+  --containerBg: #e7dfdc;
   --searchBg: var(--containerBg);
   --scrollbarColor: #3f3f3f;
-  --fontFamily: 'Roboto Mono', monospace;
+  --fontFamily: 'Monocraft', monospace;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 }
 
 #clock {
-  font-family: sans-serif;
+  font-family: Monocraft;
   font-size: 3.5rem;
   font-weight: 600;
   font-family: var(--fontFamily);
@@ -55,7 +55,7 @@ body {
   font-size: 4rem;
   color: var(--fg);
   outline: none;
-  border-radius: 3px;
+  border-radius: 10px;
   margin-bottom: 1em;
   text-align: center;
 }
